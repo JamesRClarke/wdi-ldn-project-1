@@ -24,10 +24,10 @@ router.route('/landmarks/:id')
 router.route('/landmarks/:id/edit')
 .get(secureRoute,landmark.edit);
 
-router.route('/posts/:id/comments')
+router.route('/landmarks/:id/comments')
   .post(secureRoute, landmark.createComment);
 
-router.route('/posts/:id/comments/:commentId')
+router.route('/landmarks/:id/comments/:commentId')
   .delete(secureRoute, landmark.deleteComment);
 
 

@@ -96,30 +96,27 @@ function createCommentRoute(req, res, next) {
   .then((landmark) => {
     if(!landmark) return res.notFound();
 
-    landmark.comments.push(req.body);
+    landmark.comments.push(req.body); // create an embedded record
     return landmark.save();
   })
   .then((landmark) => res.redirect(`/landmarks/${landmark.id}`))
   .catch(next);
 }
-
-
 function deleteCommentRoute(req, res, next) {
   Landmark
-  .findById(req.params.id)
-  .exec()
-  .then((landmark) => {
-    if(!landmark) return res.notFound();
+    .findById(req.params.id)
+    .exec()
+    .then((landmark) => {
+      if(!landmark) return res.notFound();
+      // get the embedded record by it's id
+      const comment = landmark.comments.id(req.params.commentId);
+      comment.remove();
 
-    const comment = landmark.comments.id(req.params.commentId);
-    comment.remove();
-
-    return landmark.save();
-  })
-  .then((landmark) => res.redirect(`/landmarks/${landmark.id}`))
-  .catch(next);
+      return landmark.save();
+    })
+    .then((landmark) => res.redirect(`/landmarks/${landmark.id}`))
+    .catch(next);
 }
-
 module.exports = {
   index: indexRoute,
   new: newRoute,

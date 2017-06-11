@@ -37,26 +37,33 @@
     </p>
 
   </figure>
-  <div class="media-content">
-    <div class="field">
-      <p class="control">
-        <textarea class="textarea" placeholder="Add a comment..."></textarea>
-      </p>
-    </div>
-    <nav class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <a class="button is-info">Submit</a>
-        </div>
-      </div>
-      <div class="level-right">
-        <div class="level-item">
-          <label class="checkbox">
-            <input type="checkbox"> Press enter to submit
-          </label>
-        </div>
-      </div>
-    </nav>
+
+<% if(locals.isAuthenticated) { %>
+  <section>
+    <h4>Leave a comment</h4>
+    <form method="POST" action="/landmarks/<%= landmark.id %>/comments">
+      <textarea name="content" id="content" placeholder="Comment"></textarea>
+      <button class="button">Leave a comment</button>
+    </form>
+  </section>
+<% } %>
+
+<section>
+  <h4>Comments</h4>
+  <% landmark.comments.forEach((comment) => { %>
+    <p><%= comment.content %></p>
+    <small><%= comment.createdBy.username %></small>
+    <small><%= comment.createdAt.toDateString() %></small>
+
+    <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+      <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn">Delete Comment</button>
+      </form>
+    <% } %>
+  <% }) %>
+</section>
+</div>
   </div>
 </article>
     </div>

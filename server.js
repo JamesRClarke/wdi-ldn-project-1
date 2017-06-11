@@ -2,12 +2,11 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const router         = require('./config/routes');
 const bodyParser     = require('body-parser');
-// const methodOverride = require('method-override');
+const methodOverride = require('method-override');
 const morgan         = require('morgan');
 const mongoose       = require('mongoose');
 mongoose.Promise     = require('bluebird');
 const session        = require('express-session');
-// const authenticateUser = require('./lib/authenticateUser');
 const app              = express();
 const flash            = require('express-flash');
 const authenticate = require('./lib/authenticateUser');
@@ -28,6 +27,14 @@ app.use(session({
   secret,
   resave: false,
   saveUninitialized: false
+}));
+
+app.use(methodOverride(function (req) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    const method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
 }));
 
 app.use(flash());
