@@ -3,17 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>WDI Project 1</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/app.js" charset="utf-8"></script>
+    <% include ./partials/stylesheets %>
+    <% include ./partials/_scripts %>
   </head>
   <body>
-    <% for(const type in messages) { %>
-      <div class="<%= type %>">
-        <%= messages[type] %>
-      </div>
-    <% } %>
+    <header>
+<% include ./partials/navbar %>
+    </header>
     <main>
+      <% for(const type in messages) { %>
+  <div class="alert alert-<%= type %>">
+    <div class="container">
+      <%= messages[type] %>
+    </div>
+  </div>
+<% } %>
+  </main>
+<div class="container">
       <%- body %>
-    </main>
+    </div>
+
+<% include ./partials/footer %>
   </body>
 </html>

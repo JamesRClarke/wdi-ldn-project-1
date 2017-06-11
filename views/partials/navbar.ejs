@@ -1,0 +1,22 @@
+
+<nav class="nav has-shadow">
+  <div class="nav-left">
+    <a href="/"class="nav-item is-tab is-hidden-mobile">Home</a>
+
+    <div class="nav-right nav-menu">
+      <a href="/landmarks" class="nav-item is-tab">Posts</a>
+
+
+      <% if(locals.isAuthenticated) { %>
+        <a href="/profile" class="nav-item is-tab">Profile</a>
+        <a href="/logout" class="nav-item is-tab">Log out</a>
+
+
+        <% } else { %>
+          <a href="/login" class="nav-item is-tab">Log In</a>
+          <a href="/register" class="nav-item is-tab">Register</a>
+
+          <% } %>
+        </div>
+      </div>
+    </nav>

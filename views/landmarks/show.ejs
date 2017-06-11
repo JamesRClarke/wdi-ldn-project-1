@@ -1,0 +1,64 @@
+
+<div class="container">
+
+
+  <div class="columns">
+    <div class="column is-7">
+      <img class="posts-page" src="<%= landmark.image %>">
+      <span><% if(locals.isAuthenticated) { %>
+       <a class="button" href="/landmarks/<%=landmark.id %>/edit">Edit Post</a>
+     <% } else { %>
+     <% } %>
+          <h2 title is-2>Posted By - <%= user.username %> </h2><br>
+
+          <%# <span class="tag is-medium is-dark">tag</span>
+          <span class="tag is-medium is-dark">tag</span>
+          <span class="tag is-medium is-light">tag</span>
+          <span class="tag is-medium is-info">tag</span>
+          <span class="tag is-medium is-success">tag</span>
+          <span class="tag is-medium is-light">tag</span>
+          <span class="tag is-medium is-light">tag</span>%>
+    </div>
+    <div class="column">
+      <div class="column">
+        <div class="box box-1">
+          <p>Info about the location will be placed here</p>
+        </div>
+      </div>
+    <div id="map"></div>
+  </div>
+  </div>
+  <div class="columns">
+    <div class="column is-half">
+      <article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="http://bulma.io/images/placeholders/128x128.png">
+    </p>
+
+  </figure>
+  <div class="media-content">
+    <div class="field">
+      <p class="control">
+        <textarea class="textarea" placeholder="Add a comment..."></textarea>
+      </p>
+    </div>
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <a class="button is-info">Submit</a>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <label class="checkbox">
+            <input type="checkbox"> Press enter to submit
+          </label>
+        </div>
+      </div>
+    </nav>
+  </div>
+</article>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h1 class="is-title">Index/Posts</h1>
+  <a href="landmarks/new">Create New Post</a>
+
+
+    <div class="row">
+<% landmarks.forEach((landmark) => { %>
+
+  <div class="col-md-3">
+  <figure class="image is-square">
+  <a href="/landmarks/<%= landmark.id %>"><img src="<%= landmark.image %>"></a>
+</div>
+<% }) %>
+</div>

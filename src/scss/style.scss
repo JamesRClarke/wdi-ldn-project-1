@@ -1,3 +1,44 @@
-body {
-  background:red;
+
+nav {
+  margin-bottom: 30px;
+}
+
+// SHOW PAGE
+img.posts-page {
+  height: 600px;
+  border:2px solid blue;
+  border-radius: 5px;
+
+}
+
+#map {
+  margin-left: 20px;
+   width: 100%;
+   height: 400px;
+   background-color: grey;
+ }
+.box {
+  margin-left: 20px;
+   width: 100%;
+   height: 180px;
+ }
+
+#key-info {
+  margin-left: 20px;
+   width: 100%;
+   height: 400px;
+   background-color: grey;
+}
+//////
+
+/// creating a post page
+
+.image-upload {
+  margin: 0 auto;
+  width: 70%;
+  height: 500px;
+
+}
+.upload-content {
+  text-align: center;
 }
