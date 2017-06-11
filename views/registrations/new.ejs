@@ -4,16 +4,52 @@
   <form method="POST" action="/register" id="validate">
 
     <div class="field">
-      <label for="username">Username</label>
+      <label class="label" for="firstName">First Name</label>
       <p class="control has-icons-left">
-        <input  name="username" id="username" class="input"  type="text" placeholder="Usermame" required>
+        <input  name="firstName" id="firstName" class="input"  type="text" placeholder="First Name" required>
         <span class="icon is-small is-left">
           <i class="fa fa-user"></i>
         </span>
       </p>
     </div>
     <div class="field">
-      <label for="email">Email</label>
+      <label class="label" for="lastName">Last Name</label>
+      <p class="control has-icons-left">
+        <input  name="lastName" id="lastName" class="input"  type="text" placeholder="Last Name" required>
+        <span class="icon is-small is-left">
+          <i class="fa fa-user"></i>
+        </span>
+      </p>
+    </div>
+
+    <div class="field">
+      <label  for="gender" class="label">Gender</label>
+      <p class="control">
+        <span class="select">
+          <select name="gender" id="gender" class="input"  type="text"
+  required>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </span>
+      </p>
+    </div>
+
+
+
+    <div class="field">
+      <label class="label" for="username">Username</label>
+      <p class="control has-icons-left">
+        <input  name="username" id="username" class="input"  type="text" placeholder="Username" required>
+        <span class="icon is-small is-left">
+          <i class="fa fa-user"></i>
+        </span>
+      </p>
+    </div>
+
+    <div class="field">
+      <label class="label" for="email">Email</label>
       <p class="control has-icons-left">
         <input  name="email" id="email" class="input" type="email" placeholder="Email" required>
         <span class="icon is-small is-left">
@@ -23,7 +59,7 @@
     </div>
 
     <div class="field">
-      <label for="password">Password</label>
+      <label class="label" for="password">Password</label>
       <p class="control has-icons-left">
         <input  name="password" id="password" class="input" type="password" placeholder="Password" required>
         <span class="icon is-small is-left">
@@ -31,8 +67,9 @@
         </span>
       </p>
     </div>
+
     <div class="field">
-      <label for="passwordConfirmation">Confirm Password</label>
+      <label class="label" for="passwordConfirmation">Confirm Password</label>
       <p class="control has-icons-left">
         <input  name="passwordConfirmation" id="passwordConfirmation" class="input" type="password" placeholder="Password Confirmation" required>
         <span class="icon is-small is-left">
