@@ -2,6 +2,12 @@
 
 <div class="container">
   <h1 title-is-1 class="">Update your details</h1>
+  <form method="POST" action="/profile">
+    <input type="hidden" name="_method" value="DELETE">
+        <button>Delete Your Account</button>
+      </form>
+
+
 
   <form method="POST" action="/profile">
     <input type="hidden" name="_method" value="PUT">
@@ -81,6 +87,5 @@
 
     <button>Save Changes</button>
   </form>
-
 
 </div>

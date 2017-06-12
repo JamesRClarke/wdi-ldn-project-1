@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="">Register an Account</h1>
 
-  <form method="POST" action="/register" id="validate">
+  <form method="POST" action="/register" enctype="multipart/form-data" id="validate">
 
     <div class="field">
       <label class="label" for="firstName">First Name</label>
@@ -57,6 +57,11 @@
         </span>
       </p>
     </div>
+
+    <div>
+  <label for="image">Image</label>
+  <input type="file" name="image" id="image">
+</div>
 
     <div class="field">
       <label class="label" for="password">Password</label>

@@ -5,7 +5,9 @@ function newRoute(req, res) {
 }
 
 function createRoute(req, res, next) {
-  console.log(req.body);
+
+  if(req.file) req.body.image = req.file.key;
+
   User
     .create(req.body)
     .then(() => res.redirect('/login'))
@@ -23,17 +25,17 @@ function editRoute(req, res) {
   return res.render('registrations/edit');
 }
 
-function updateRoute(req, res, next) {
-  for(const field in req.body) {
-    req.user[field] = req.body[field];
+function updateRoute(req, res) {
+  if(req.file) req.body.image = req.file.key;
+
+
+  for(const key in req.body) {
+    req.user[key] = req.body[key];
   }
 
-  req.user.save()
-    .then(() => res.redirect('/profile'))
-    .catch((err) => {
-      if(err.name === 'ValidationError') return res.badRequest('/profile/edit', err.toString());
-      next(err);
-    });
+  return req.user
+    .save()
+    .then(() => res.redirect('/profile'));
 }
 
 function deleteRoute(req, res, next) {

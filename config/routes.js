@@ -5,6 +5,9 @@ const registrations = require('../controllers/registrations');
 const landmark = require('../controllers/landmarks');
 const statics = require('../controllers/statics');
 const secureRoute = require('../lib/secureRoute');
+const oauth = require('../controllers/oauth');
+const upload = require('../lib/upload');
+
 
 router.route('/')
 .get(statics.index);
@@ -25,30 +28,22 @@ router.route('/landmarks/:id/edit')
 .get(secureRoute,landmark.edit);
 
 router.route('/landmarks/:id/comments')
-  .post(secureRoute, landmark.createComment);
+.post(secureRoute, landmark.createComment);
 
 router.route('/landmarks/:id/comments/:commentId')
-  .delete(secureRoute, landmark.deleteComment);
+.delete(secureRoute, landmark.deleteComment);
 
-
-// router.route('/users/:id')
-// .get(users.show)
-// .post(upload.single('image'), users.update)
-// .delete(users.delete);
-//
-// router.route('/users/:id/edit')
-// .get(users.edit);
 
 router.route('/register')
-  .get(registrations.new)
-  .post(registrations.create);
+.get(registrations.new)
+.post(registrations.create);
 
 router.route('/login')
-  .get(sessions.new)
-  .post(sessions.create);
+.get(sessions.new)
+.post(sessions.create);
 
 router.route('/logout')
-  .get(sessions.delete);
+.get(sessions.delete);
 
 router.route('/profile')
 .get(registrations.show)
@@ -57,6 +52,14 @@ router.route('/profile')
 
 router.route('/profile/edit')
 .get(secureRoute,registrations.edit);
+
+router.route('/oauth/github')
+.get(oauth.github);
+
+router.route('/profile')
+.get(secureRoute, registrations.show)
+.post(secureRoute, upload.single('image'), registrations.update)
+.delete(secureRoute, registrations.delete);
 
 
 router.all('*', (req, res) => res.notFound());
