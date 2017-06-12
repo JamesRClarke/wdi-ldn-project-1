@@ -36,7 +36,7 @@ router.route('/landmarks/:id/comments/:commentId')
 
 router.route('/register')
 .get(registrations.new)
-.post(registrations.create);
+.post(upload.single('image'), registrations.create);
 
 router.route('/login')
 .get(sessions.new)
