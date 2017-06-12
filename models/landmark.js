@@ -17,6 +17,7 @@ commentSchema.methods.belongsTo = function belongsTo(user) {
 
 const landmarkSchema = new mongoose.Schema({
   image: {type: String},
+  caption: {type: String},
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User', required: true},
   createdAt: { type: Date, default: Date.now },
   comments: [commentSchema]

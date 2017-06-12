@@ -79,7 +79,7 @@ function deleteRoute(req, res, next) {
   .exec()
   .then((landmark) => {
     if(!landmark) return res.notFound();
-    if(!landmark.belongsTo(req.user)) return res.unauthorized(`/landmarks/${landmark.id}`, 'You do not have permission to delete that resource');
+    // if(!landmark.belongsTo(req.user)) return res.unauthorized(`/landmarks/${landmark.id}`, 'You do not have permission to delete that resource');
     return landmark.remove();
   })
   .then(() => res.redirect('/landmarks'))

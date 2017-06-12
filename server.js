@@ -10,6 +10,8 @@ const session        = require('express-session');
 const app              = express();
 const flash            = require('express-flash');
 const authenticate = require('./lib/authenticateUser');
+const customResponses = require('./lib/customResponses');
+
 
 
 const { port, dbURI, secret } = require('./config/environment');
@@ -40,7 +42,7 @@ app.use(methodOverride(function (req) {
 app.use(flash());
 
 app.use(authenticate);
-
+app.use(customResponses);
 app.use(router);
 
 

@@ -5,69 +5,58 @@
   <div class="columns">
     <div class="column is-7">
       <img class="posts-page" src="<%= landmark.image %>">
-      <span><% if(locals.isAuthenticated ) { %>
-       <a class="button" href="/landmarks/<%=landmark.id %>/edit">Edit Post</a>
+      <h4><%= landmark.createdBy.username %> </h4><span><%= landmark.caption %>  </span>
+      <span><% if(locals.isAuthenticated && landmark.belongsTo(user)) { %>
+        <a class="button" href="/landmarks/<%=landmark.id %>/edit">Edit Post</a>
 
-     <% }  %>
-     <form method="POST" action="/landmarks/<%= landmark.id %>">
-  <input type="hidden" name="_method" value="DELETE">
-  <button>Delete</button>
-</form>
-          <%# <span class="tag is-medium is-dark">tag</span>
-          <span class="tag is-medium is-dark">tag</span>
-          <span class="tag is-medium is-light">tag</span>
-          <span class="tag is-medium is-info">tag</span>
-          <span class="tag is-medium is-success">tag</span>
-          <span class="tag is-medium is-light">tag</span>
-          <span class="tag is-medium is-light">tag</span>%>
-    </div>
-    <div class="column">
+        <% }  %>
+
+        <%# <span class="tag is-medium is-dark">tag</span>
+        <span class="tag is-medium is-dark">tag</span>
+        <span class="tag is-medium is-light">tag</span>
+        <span class="tag is-medium is-info">tag</span>
+        <span class="tag is-medium is-success">tag</span>
+        <span class="tag is-medium is-light">tag</span>
+        <span class="tag is-medium is-light">tag</span>%>
+      </div>
       <div class="column">
-        <div class="box box-1">
-          <p>Info about the location will be placed here</p>
+        <div class="column">
+          <div class="box box-1">
+            <p>Info about the location will be placed here</p>
+          </div>
+        </div>
+        <div id="map"></div>
+      </div>
+    </div>
+
+          <% if(locals.isAuthenticated) { %>
+            <section>
+            <h4>Leave a comment</h4>
+            <form method="POST" action="/landmarks/<%= landmark.id %>/comments">
+            <textarea name="content" id="content" placeholder="Comment"></textarea>
+            <button class="button">Leave a comment</button>
+            </form>
+            </section>
+            <% } %>
+<br>
+            <div class="columns">
+              <div class="coulmn is-half">
+                <h4>Comments</h4>
+                <% landmark.comments.forEach((comment) => { %>
+                  <p><%= comment.content %></p>
+                  <small><%= comment.createdBy.username %></small>
+                  <small><%= comment.createdAt.toDateString() %></small>
+
+                  <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+                    <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn">Delete Comment</button>
+                    </form>
+                    <% } %>
+                    <% }) %>
+                  </div>
+                </div>
+          </article>
         </div>
       </div>
-    <div id="map"></div>
-  </div>
-  </div>
-  <div class="columns">
-    <div class="column is-half">
-      <article class="media">
-  <figure class="media-left">
-    <p class="image is-64x64">
-      <img src="http://bulma.io/images/placeholders/128x128.png">
-    </p>
-
-  </figure>
-
-<% if(locals.isAuthenticated) { %>
-  <section>
-    <h4>Leave a comment</h4>
-    <form method="POST" action="/landmarks/<%= landmark.id %>/comments">
-      <textarea name="content" id="content" placeholder="Comment"></textarea>
-      <button class="button">Leave a comment</button>
-    </form>
-  </section>
-<% } %>
-
-
-  <h4>Comments</h4>
-  <% landmark.comments.forEach((comment) => { %>
-    <p><%= comment.content %></p>
-    <small><%= comment.createdBy.username %></small>
-    <small><%= comment.createdAt.toDateString() %></small>
-
-    <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
-      <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
-        <input type="hidden" name="_method" value="DELETE">
-        <button class="btn">Delete Comment</button>
-      </form>
-    <% } %>
-  <% }) %>
-
-</div>
-  </div>
-</article>
     </div>
-  </div>
-</div>

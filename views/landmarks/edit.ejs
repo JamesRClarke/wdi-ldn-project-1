@@ -1,1 +1,73 @@
 <h1> Edit Page Working</h1>
+
+
+
+<form method="POST" action="/landmarks/<%= landmark.id %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <button>Delete Your Post</button>
+</form>
+<form method="POST" action="/landmarks/<%= landmark.id %>">
+  <input type="hidden" name="_method" value="PUT">
+  <button class="button">Update Hotel</button>
+  <div class="container">
+
+
+    <div class="columns">
+      <div class="column is-7">
+        <img class="posts-page" src="<%= landmark.image %>">
+
+        <h4><%= landmark.createdBy.username %></h4>
+        <span><label for="caption"><input id="caption" name="caption" value="<%= landmark.caption %>"> </input></span>
+        </div>
+      </form>
+    </form>
+    <%# <span class="tag is-medium is-dark">tag</span>
+    <span class="tag is-medium is-dark">tag</span>
+    <span class="tag is-medium is-light">tag</span>
+    <span class="tag is-medium is-info">tag</span>
+    <span class="tag is-medium is-success">tag</span>
+    <span class="tag is-medium is-light">tag</span>
+    <span class="tag is-medium is-light">tag</span>%>
+
+    <div class="column">
+      <div class="column">
+        <div class="box box-1">
+          <p>Info about the location will be placed here</p>
+        </div>
+      </div>
+      <div id="map"></div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-half">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img src="http://bulma.io/images/placeholders/128x128.png">
+          </p>
+
+        </figure>
+
+
+
+
+        <h4>Comments</h4>
+        <% landmark.comments.forEach((comment) => { %>
+          <p><%= comment.content %></p>
+          <small><%= comment.createdBy.username %></small>
+          <small><%= comment.createdAt.toDateString() %></small>
+
+
+          <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="btn">Delete Comment</button>
+          </form>
+
+          <% }) %>
+
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</div>
