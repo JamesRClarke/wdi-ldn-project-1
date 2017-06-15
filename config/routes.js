@@ -7,14 +7,16 @@ const statics = require('../controllers/statics');
 const secureRoute = require('../lib/secureRoute');
 const oauth = require('../controllers/oauth');
 const upload = require('../lib/upload');
+const googleProxy = require('../controllers/googlePlaces');
 
 
 router.route('/')
 .get(statics.index);
 
+
 router.route('/landmarks')
 .get( secureRoute,landmark.index)
-.post(secureRoute,landmark.create);
+.post(upload.single('image'),secureRoute,landmark.create);
 
 router.route('/landmarks/new')
 .get(secureRoute,landmark.new);
@@ -56,11 +58,15 @@ router.route('/profile/edit')
 router.route('/oauth/github')
 .get(oauth.github);
 
+router.route('/oauth/instagram')
+.get(oauth.instagram);
+
 router.route('/profile')
 .get(secureRoute, registrations.show)
 .post(secureRoute, upload.single('image'), registrations.update)
 .delete(secureRoute, registrations.delete);
 
+router.post('/google', googleProxy.proxy);
 
 router.all('*', (req, res) => res.notFound());
 

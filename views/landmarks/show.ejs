@@ -1,61 +1,133 @@
-
 <div class="container">
-
-
   <div class="columns">
-    <div class="column is-7">
-      <img class="posts-page" src="<%= landmark.image %>">
-      <h4><%= landmark.createdBy.username %> </h4><span><%= landmark.caption %>  </span>
-      <span><% if(locals.isAuthenticated && landmark.belongsTo(user)) { %>
-        <a class="button" href="/landmarks/<%=landmark.id %>/edit">Edit Post</a>
+    <div class="column is-8">
+      <img class="posts-page has-shadow" src="<%= landmark.imageSRC %>">
 
-        <% }  %>
-
-        <%# <span class="tag is-medium is-dark">tag</span>
-        <span class="tag is-medium is-dark">tag</span>
-        <span class="tag is-medium is-light">tag</span>
-        <span class="tag is-medium is-info">tag</span>
-        <span class="tag is-medium is-success">tag</span>
-        <span class="tag is-medium is-light">tag</span>
-        <span class="tag is-medium is-light">tag</span>%>
       </div>
       <div class="column">
         <div class="column">
-          <div class="box box-1">
-            <p>Info about the location will be placed here</p>
-          </div>
+          <h2 class="title is-2"><%= landmark.title %></h2>
+          <hr>
+          <h5 class="title is-5">Posted by...</h5>
+          <h3 class="title is-3"><%= landmark.createdBy.username %> </h3><span><%= landmark.caption %>  </span>
+          <span><% if(locals.isAuthenticated && landmark.belongsTo(user)) { %>
+            <a class="button" href="/landmarks/<%=landmark.id %>/edit">Edit Post</a>
+            <% }  %>
+            <hr>
+
         </div>
-        <div id="map"></div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-4">
+        <label class="label">Subject</label>
+        <p>Find places near this location!</p>
+        <p class="control">
+          <span class="select">
+            <select id="myselect">
+              <option selected disabled>Please Choose</option>
+              <option id="transport" >Transport</option>
+              <option id="foodDrink" >Food & Drink</option>
+              <option id="health" >Healthcare</option>
+            </select>
+          </span>
+        </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="columns">
+      <div class="column is-12">
+        <div id="map" data-lat="<%= landmark.lat %>" data-lng="<%= landmark.lng %>"></div>
       </div>
     </div>
 
-          <% if(locals.isAuthenticated) { %>
-            <section>
-            <h4>Leave a comment</h4>
-            <form method="POST" action="/landmarks/<%= landmark.id %>/comments">
-            <textarea name="content" id="content" placeholder="Comment"></textarea>
-            <button class="button">Leave a comment</button>
-            </form>
-            </section>
-            <% } %>
-<br>
-            <div class="columns">
-              <div class="coulmn is-half">
-                <h4>Comments</h4>
-                <% landmark.comments.forEach((comment) => { %>
-                  <p><%= comment.content %></p>
-                  <small><%= comment.createdBy.username %></small>
-                  <small><%= comment.createdAt.toDateString() %></small>
+  <div class="columns">
+    <div class="column is-7">
+      <% if(locals.isAuthenticated) { %>
+        <form method="POST" action="/landmarks/<%= landmark.id %>/comments">
+        <article class="media">
+        <figure class="media-left">
+        <p class="image is-64x64">
+        <img src="<%= user.imageSRC %>">
+        </p>
+        </figure>
+        <div class="media-content">
+        <div class="field">
+        <p class="control">
+        <textarea class="textarea" name="content" placeholder="Add a comment..."></textarea>
+        </p>
+        </div>
+        <div class="field">
+        <p class="control">
 
-                  <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
-                    <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn">Delete Comment</button>
-                    </form>
-                    <% } %>
-                    <% }) %>
-                  </div>
-                </div>
+        <button class="button">Post comment</button>
+
+        </p>
+        </div>
+        </div>
+        </article>
+        </form>
+        <% } %>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="columns">
+      <div class="column is-12">
+
+        <% landmark.comments.forEach((comment) => { %>
+          <div class="box">
+          <article class="media">
+          <figure class="media-left">
+          <p class="image is-64x64">
+          <img src="<%= comment.createdBy.imageSRC %>">
+          </p>
+          </figure>
+
+          <div class="media-content">
+          <div class="content">
+          <p>
+          <strong><%= comment.createdBy.user %></strong>
+          <small><%= comment.createdBy.username %></small>
+
+
+          <br>
+          <%= comment.content %>
+          </p>
+          </div>
+
+          <nav class="level is-mobile">
+          <div class="level-left">
+          <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-reply"></i></span>
+          </a>
+          <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-heart"></i></span>
+          </a>
+          </div>
+          </nav>
+          </div>
+          <div class="media-right">
+          <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+            <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="delete"></button>
+            </form>
+            <% } %>
+
+            </div>
+            <div>
+            <small><%= comment.createdAt.toDateString() %></small>
+            </div>
+
+            </div>
+            <% }) %>
+
+
           </article>
         </div>
       </div>

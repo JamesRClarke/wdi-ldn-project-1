@@ -1,4 +1,4 @@
-<h1> Edit Page Working</h1>
+<h1 is-title-1> Edit Your Post</h1>
 
 
 
@@ -8,13 +8,13 @@
 </form>
 <form method="POST" action="/landmarks/<%= landmark.id %>">
   <input type="hidden" name="_method" value="PUT">
-  <button class="button">Update Post</button>
+  <button class="button">Save Changes</button>
   <div class="container">
 
 
     <div class="columns">
       <div class="column is-7">
-        <img class="posts-page" src="<%= landmark.image %>">
+        <img class="posts-page" src="<%= landmark.imageSRC %>">
 
         <h4><%= landmark.createdBy.username %></h4>
         <span><label for="caption"><input id="caption" name="caption" value="<%= landmark.caption %>"> </input></span>
@@ -32,10 +32,18 @@
     <div class="column">
       <div class="column">
         <div class="box box-1">
-          <p>Info about the location will be placed here</p>
+          <h3>This Location is:<br> <%= landmark.title %></h3>
+          <select id="myselect">
+            <option selected disabled>Please Choose</option>
+            <option id="transport" >Transport</option>
+            <option id="foodDrink" >Food & Drink</option>
+            <option id="health" >Healthcare</option>
+          </select>
+           <input type="submit" name="GO" value="Go"/>
         </div>
       </div>
-      <div id="map"></div>
+      <div id="map" data-lat="<%= landmark.lat %>" data-lng="<%= landmark.lng %>"></div>
+      </div>
     </div>
   </div>
   <div class="columns">

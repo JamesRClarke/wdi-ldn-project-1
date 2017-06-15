@@ -1,53 +1,115 @@
-const router = require('express').Router();
-const postsController = require('../controllers/posts');
-const sessionsController = require('../controllers/sessions');
-const registrationsController = require('../controllers/registrations');
-const secureRoute = require('../lib/secureRoute');
-const upload = require('../lib/upload');
-
-router.get('/', (req, res) => res.render('statics/index'));
-
-router.route('/posts')
-  .get(postsController.index)
-  .post(secureRoute, upload.single('image'), postsController.create);
-
-router.route('/posts/new')
-  .get(secureRoute, postsController.new);
-
-router.route('/posts/:id')
-  .get(postsController.show)
-  .put(secureRoute, postsController.update)
-  .delete(secureRoute, postsController.delete);
-
-router.route('/posts/:id/edit')
-  .get(secureRoute, postsController.edit);
-
-router.route('/posts/:id/comments')
-  .post(secureRoute, postsController.createComment);
-
-router.route('/posts/:id/comments/:commentId')
-  .delete(secureRoute, postsController.deleteComment);
+<div class="container">
+  <div class="columns">
+    <div class="column is-7">
+      <img class="posts-page" src="<%= landmark.imageSRC %>">
+      <h3 class="title is-3"><%= landmark.createdBy.username %> </h3><span><%= landmark.caption %>  </span>
+      <span><% if(locals.isAuthenticated && landmark.belongsTo(user)) { %>
+        <a class="button" href="/landmarks/<%=landmark.id %>/edit">Edit Post</a>
+        <% }  %>
+      </div>
+      <div class="column">
+        <div class="column">
 
 
-router.route('/register')
-  .get(registrationsController.new)
-  .post(registrationsController.create);
+            <h3>This Location is:</h3> <h2 class="title is-2"><%= landmark.title %></h2>
+            <hr>
+            <select id="myselect">
+              <option selected disabled>Please Choose</option>
+              <option id="transport" >Transport</option>
+              <option id="foodDrink" >Food & Drink</option>
+              <option id="health" >Healthcare</option>
+            </select>
+            <hr>
+        </div>
 
-router.route('/profile')
-  .get(secureRoute, registrationsController.show)
-  .put(secureRoute, registrationsController.update)
-  .delete(secureRoute, registrationsController.delete);
+        <div id="map" data-lat="<%= landmark.lat %>" data-lng="<%= landmark.lng %>"></div>
+      </div>
+    </div>
 
-router.route('/profile/edit')
-  .get(secureRoute, registrationsController.edit);
 
-router.route('/login')
-  .get(sessionsController.new)
-  .post(sessionsController.create);
+    <div class="columns">
+      <div class="column is-7">
+        <% if(locals.isAuthenticated) { %>
+          <form method="POST" action="/landmarks/<%= landmark.id %>/comments">
+          <article class="media">
+          <figure class="media-left">
+          <p class="image is-64x64">
+          <img src="<%= user.imageSRC %>">
+          </p>
+          </figure>
+          <div class="media-content">
+          <div class="field">
+          <p class="control">
+          <textarea class="textarea" name="content" placeholder="Add a comment..."></textarea>
+          </p>
+          </div>
+          <div class="field">
+          <p class="control">
 
-router.route('/logout')
-  .get(sessionsController.delete);
+          <button class="button">Post comment</button>
 
-router.all('*', (req, res) => res.notFound());
+          </p>
+          </div>
+          </div>
+          </article>
+          </form>
+          <% } %>
+        </div>
+      </div>
+      <br>
+      <div class="columns">
+        <div class="column is-7">
 
-module.exports = router;
+          <% landmark.comments.forEach((comment) => { %>
+            <div class="box">
+            <article class="media">
+            <figure class="media-left">
+            <p class="image is-64x64">
+            <img src="<%= comment.createdBy.imageSRC %>">
+            </p>
+            </figure>
+
+            <div class="media-content">
+            <div class="content">
+            <p>
+            <strong><%= comment.createdBy.user %></strong>
+            <small><%= comment.createdBy.username %></small>
+
+
+            <br>
+            <%= comment.content %>
+            </p>
+            </div>
+
+            <nav class="level is-mobile">
+            <div class="level-left">
+            <a class="level-item">
+            <span class="icon is-small"><i class="fa fa-reply"></i></span>
+            </a>
+            <a class="level-item">
+            <span class="icon is-small"><i class="fa fa-heart"></i></span>
+            </a>
+            </div>
+            </nav>
+            </div>
+            <div class="media-right">
+            <% if(locals.isAuthenticated && comment.belongsTo(user)) { %>
+              <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="delete"></button>
+              </form>
+              <% } %>
+
+              </div>
+              <div>
+              <small><%= comment.createdAt.toDateString() %></small>
+              </div>
+
+              </div>
+              <% }) %>
+
+
+            </article>
+          </div>
+        </div>
+      </div>

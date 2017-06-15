@@ -1,5 +1,3 @@
-
-
 const github = {
   loginUrl: 'http://github.com/login/oauth/authorize',
   accessTokenUrl: 'https://github.com/login/oauth/access_token',
@@ -12,6 +10,19 @@ const github = {
   }
 };
 
+const instagram = {
+  loginUrl: 'https://api.instagram.com/oauth/authorize/',
+  accessTokenUrl: 'https://api.instagram.com/oauth/access_token',
+  redirectUri: 'http://localhost:8000/oauth/instagram',
+  clientId: process.env.INTSA_CLIENT_ID,
+  clientSecret: process.env.INSTA_CLIENT_SECRET,
+  responseCode: 'code',
+  getLoginUrl() {
+    return `${this.loginUrl}?client_id=${this.clientId}&redirect_uri=${this.redirectUri}&response_type=${this.responseCode}`;
+  }
+};
+
 module.exports = {
-  github
+  github,
+  instagram
 };

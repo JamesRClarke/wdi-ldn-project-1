@@ -12,16 +12,14 @@
     </header>
     <main>
       <% for(const type in messages) { %>
-  <div class="alert alert-<%= type %>">
-    <div class="container">
+  <div class="notification is-<%= type %>">
       <%= messages[type] %>
-    </div>
   </div>
 <% } %>
   </main>
 <div class="container">
       <%- body %>
-    </div>
+  </div>
 
 <% include ./partials/footer %>
   </body>

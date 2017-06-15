@@ -1,14 +1,7 @@
 
 
 <div class="container">
-  <h1 title-is-1 class="">Update your details</h1>
-  <form method="POST" action="/profile">
-    <input type="hidden" name="_method" value="DELETE">
-        <button>Delete Your Account</button>
-      </form>
-
-
-
+  <h1 class="title is-2">Update your details</h1>
   <form method="POST" action="/profile">
     <input type="hidden" name="_method" value="PUT">
 
@@ -68,7 +61,7 @@
     <div class="field">
       <label class="label" for="password">Password</label>
       <p class="control has-icons-left">
-        <input  name="password" id="password" class="input" type="password" placeholder="Password" required>
+        <input  name="password" id="password" class="input" type="password" pvalue="<%= user.password%>" required>
         <span class="icon is-small is-left">
           <i class="fa fa-lock"></i>
         </span>
@@ -78,14 +71,19 @@
     <div class="field">
       <label class="label" for="passwordConfirmation">Confirm Password</label>
       <p class="control has-icons-left">
-        <input  name="passwordConfirmation" id="passwordConfirmation" class="input" type="password" placeholder="Password Confirmation" required>
+        <input  name="passwordConfirmation" id="passwordConfirmation" class="input" type="password" value="<%= user.password%>" required>
         <span class="icon is-small is-left">
           <i class="fa fa-lock"></i>
         </span>
       </p>
     </div>
 
-    <button>Save Changes</button>
+    <button class="button is-success">Save Changes</button>
   </form>
+  <br>
+  <form method="POST" action="/profile">
+    <input type="hidden" name="_method" value="DELETE">
+        <button class="button is-danger">Delete Your Account</button>
+      </form>
 
 </div>

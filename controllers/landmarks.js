@@ -15,7 +15,7 @@ function newRoute(req, res) {
 function createRoute(req, res, next) {
 
   req.body.createdBy = req.user;
-
+  if(req.file) req.body.image = req.file.key;
   Landmark
   .create(req.body)
   .then(() => res.redirect('/landmarks'))
@@ -96,12 +96,13 @@ function createCommentRoute(req, res, next) {
   .then((landmark) => {
     if(!landmark) return res.notFound();
 
-    landmark.comments.push(req.body); // create an embedded record
+    landmark.comments.push(req.body);
     return landmark.save();
   })
   .then((landmark) => res.redirect(`/landmarks/${landmark.id}`))
   .catch(next);
 }
+
 function deleteCommentRoute(req, res, next) {
   Landmark
     .findById(req.params.id)
@@ -117,6 +118,7 @@ function deleteCommentRoute(req, res, next) {
     .then((landmark) => res.redirect(`/landmarks/${landmark.id}`))
     .catch(next);
 }
+
 module.exports = {
   index: indexRoute,
   new: newRoute,

@@ -18,7 +18,6 @@ function sessionsCreate(req, res, next) {
     req.session.userId = user.id;
     req.session.isAuthenticated = true;
 
-
     req.flash('success', `Welcome, ${user.username}!`);
     res.redirect('/landmarks');
   })

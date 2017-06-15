@@ -1,33 +1,35 @@
-img {
-  width: 300px;
-  height: 500px;
+body {
+  font-family: 'Expletus Sans', cursive;
+  background-image: url('http://media.gettyimages.com/videos/guilin-hills-at-dusk-china-video-id497459630')
 }
-
-
+.login-oauth {
+  width: 100%;
+}
 nav {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
-
 // SHOW PAGE
 img.posts-page {
   height: 600px;
-  border:2px solid blue;
+  -webkit-box-shadow: 0 13px 8px -8px black;
+   -moz-box-shadow: 0 13px 8px -8px black;
+        box-shadow: 0 13px 8px -8px black;
   border-radius: 5px;
-
 }
-
 #map {
   margin-left: 20px;
    width: 100%;
-   height: 400px;
+   height: 500px;
    background-color: grey;
+   -webkit-box-shadow: 0 13px 8px -8px black;
+    -moz-box-shadow: 0 13px 8px -8px black;
+         box-shadow: 0 13px 8px -8px black;
  }
-.box {
+.box1 {
   margin-left: 20px;
    width: 100%;
    height: 180px;
  }
-
 #key-info {
   margin-left: 20px;
    width: 100%;
@@ -35,15 +37,20 @@ img.posts-page {
    background-color: grey;
 }
 //////
-
 /// creating a post page
-
 .image-upload {
   margin: 0 auto;
   width: 70%;
   height: 500px;
-
 }
 .upload-content {
   text-align: center;
+}
+// jquery validate
+.card {
+  border: 1px solid grey;
+  -webkit-box-shadow: 0 9px 8px -8px black;
+   -moz-box-shadow: 0 9px 8px -8px black;
+        box-shadow: 0 9px 8px -8px black;
+
 }
