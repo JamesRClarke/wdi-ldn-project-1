@@ -1,81 +1,108 @@
-<h1 is-title-1> Edit Your Post</h1>
+<div class="container">
 
+  <div class="columns">
+    <div class="column is-8">
+      <img class="posts-page has-shadow" src="<%= landmark.imageSRC %>">
 
-
-<form method="POST" action="/landmarks/<%= landmark.id %>">
-  <input type="hidden" name="_method" value="DELETE">
-  <button>Delete Your Post</button>
-</form>
-<form method="POST" action="/landmarks/<%= landmark.id %>">
-  <input type="hidden" name="_method" value="PUT">
-  <button class="button">Save Changes</button>
-  <div class="container">
-
-
-    <div class="columns">
-      <div class="column is-7">
-        <img class="posts-page" src="<%= landmark.imageSRC %>">
-
-        <h4><%= landmark.createdBy.username %></h4>
-        <span><label for="caption"><input id="caption" name="caption" value="<%= landmark.caption %>"> </input></span>
-        </div>
-      </form>
-    </form>
-    <%# <span class="tag is-medium is-dark">tag</span>
-    <span class="tag is-medium is-dark">tag</span>
-    <span class="tag is-medium is-light">tag</span>
-    <span class="tag is-medium is-info">tag</span>
-    <span class="tag is-medium is-success">tag</span>
-    <span class="tag is-medium is-light">tag</span>
-    <span class="tag is-medium is-light">tag</span>%>
-
-    <div class="column">
-      <div class="column">
-        <div class="box box-1">
-          <h3>This Location is:<br> <%= landmark.title %></h3>
-          <select id="myselect">
-            <option selected disabled>Please Choose</option>
-            <option id="transport" >Transport</option>
-            <option id="foodDrink" >Food & Drink</option>
-            <option id="health" >Healthcare</option>
-          </select>
-           <input type="submit" name="GO" value="Go"/>
-        </div>
       </div>
-      <div id="map" data-lat="<%= landmark.lat %>" data-lng="<%= landmark.lng %>"></div>
+      <div class="column">
+        <div class="column">
+          <h2 class="title is-2"><%= landmark.title %></h2>
+          <hr>
+          <h5 class="title is-5">Posted by...</h5>
+          <h3 class="title is-3"><%= landmark.createdBy.username %> </h3><span><%= landmark.caption %>  </span>
+          <span>
+            <hr>
+            <form method="POST" action="/landmarks/<%= landmark.id %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button class="button is-danger">Delete Your Post</button>
+            </form>
+            <br>
+            <form method="POST" action="/landmarks/<%= landmark.id %>">
+              <input type="hidden" name="_method" value="PUT">
+              <button class="button is-success">Save Changes</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="columns">
-    <div class="column is-half">
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img src="http://bulma.io/images/placeholders/128x128.png">
-          </p>
+    <div class="columns">
+      <div class="column is-4">
+        <label class="label">Subject</label>
+        <p>Find places near this location!</p>
+        <p class="control">
+          <span class="select">
+            <select disabled id="myselect">
+              <option selected disabled>Please Choose</option>
+              <option id="transport" >Transport</option>
+              <option id="foodDrink" >Food & Drink</option>
+              <option id="health" >Healthcare</option>
+            </select>
+          </span>
+        </p>
+        </div>
+    </div>
 
-        </figure>
+    <hr>
 
+    <div class="columns">
+      <div class="column is-12">
+        <div id="map" data-lat="<%= landmark.lat %>" data-lng="<%= landmark.lng %>"></div>
+      </div>
+    </div>
 
+    <br>
+    <br>
 
+    <div class="columns">
+      <div class="column is-12">
 
-        <h4>Comments</h4>
         <% landmark.comments.forEach((comment) => { %>
-          <p><%= comment.content %></p>
+          <div class="box">
+          <article class="media">
+          <figure class="media-left">
+          <p class="image is-64x64">
+          <img src="<%= comment.createdBy.imageSRC %>">
+          </p>
+          </figure>
+
+          <div class="media-content">
+          <div class="content">
+          <p>
+          <strong><%= comment.createdBy.user %></strong>
           <small><%= comment.createdBy.username %></small>
-          <small><%= comment.createdAt.toDateString() %></small>
 
 
-          <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
-          <input type="hidden" name="_method" value="DELETE">
-          <button class="btn">Delete Comment</button>
-          </form>
+          <br>
+          <%= comment.content %>
+          </p>
+          </div>
 
-          <% }) %>
+          <nav class="level is-mobile">
+          <div class="level-left">
+          <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-reply"></i></span>
+          </a>
+          <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-heart"></i></span>
+          </a>
+          </div>
+          </nav>
+          </div>
+          <div class="media-right">
 
+            <form method="POST" action="/landmarks/<%= landmark.id %>/comments/<%= comment.id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="delete"></button>
+            </form>
+
+            </div>
+            <div>
+            <small><%= comment.createdAt.toDateString() %></small>
+            </div>
+
+            </div>
+            <% }) %>
+
+          </article>
         </div>
       </div>
-    </article>
-  </div>
-</div>
-</div>
+    </div>

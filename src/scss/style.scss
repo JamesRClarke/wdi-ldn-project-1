@@ -1,9 +1,24 @@
 body {
   font-family: 'Expletus Sans', cursive;
-  background-image: url('http://media.gettyimages.com/videos/guilin-hills-at-dusk-china-video-id497459630')
+  height: 1400px;
+  margin:0;
+  padding:0;
+  height:100%;
 }
+#main-title {
+  font-family: 'Exo', sans-serif;
+  margin-left: 5px;
+}
+
 .login-oauth {
   width: 100%;
+}
+#top-image {
+// background:url('http://cdn.pcwallart.com/images/bali-wallpaper-3.jpg') -25px -50px;
+background:url('https://media.giphy.com/media/y7IdZTv0v5gvS/giphy.gif'); background-size: cover;
+position:fixed ;
+width:100%;
+  height:100%;
 }
 nav {
   margin-bottom: 10px;
@@ -52,5 +67,16 @@ img.posts-page {
   -webkit-box-shadow: 0 9px 8px -8px black;
    -moz-box-shadow: 0 9px 8px -8px black;
         box-shadow: 0 9px 8px -8px black;
-
 }
+
+.landing-title {
+  color: white;
+  text-align: center;
+}
+
+  // footer {
+  //   position: fixed;
+  //   bottom:0;
+  //   width:100%;
+  //   height:10px;
+  // }

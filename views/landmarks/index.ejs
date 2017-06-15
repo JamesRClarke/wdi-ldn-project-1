@@ -1,14 +1,15 @@
+<div class="container">
 <h1 class="title is-1">Posts</h1>
 
 
 
 <div class="columns is-multiline">
 <% landmarks.forEach((landmark) => { %>
-<div class="column is-half">
+<div class="column is-4">
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <a href="/landmarks/<%= landmark.id %>"><img src="<%= landmark.imageSRC %>"><img src="<%= landmark.imageSRC %>"></a> s
+        <a href="/landmarks/<%= landmark.id %>"><img src="<%= landmark.createdBy.imageSRC %>"><img src="<%= landmark.imageSRC %>"></a> s
       </figure>
     </div>
   <div class="card-content">
@@ -28,4 +29,5 @@
   </div>
 </div>
   <% }) %>
+</div>
 </div>

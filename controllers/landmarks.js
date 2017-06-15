@@ -3,6 +3,7 @@ const Landmark = require('../models/landmark');
 function indexRoute(req, res, next) {
   Landmark
   .find()
+  .populate('createdBy')
   .exec()
   .then((landmarks) => res.render('landmarks/index', { landmarks }))
   .catch(next);
@@ -42,6 +43,7 @@ function showRoute(req, res, next) {
 function editRoute(req, res, next) {
   Landmark
   .findById(req.params.id)
+  .populate('createdBy comments.createdBy')
   .exec()
   .then((landmark) => {
     if(!landmark) return res.redirect();
