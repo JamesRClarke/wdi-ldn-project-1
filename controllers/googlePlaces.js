@@ -4,7 +4,7 @@ function googleProxy(req, res) {
   rp({
     url:
 
-`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.body.lat},${req.body.lng}&rankby=distance&types=${req.body.selection}&key=${process.env.GCLOUD_API_KEY}`,
+`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.body.lat},${req.body.lng}&rankby=distance&types=${req.body.selection}&key=${process.env.GCLOUD_SECRET}`,
 
     method: 'POST',
     json: true
