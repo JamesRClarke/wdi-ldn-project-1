@@ -24,6 +24,7 @@ userSchema
 });
 
 
+
 userSchema.virtual('passwordConfirmation')
 .set(function setPasswordConfirmation(passwordConfirmation) {
   this._passwordConfirmation = passwordConfirmation;
@@ -35,7 +36,7 @@ userSchema.pre('validate', function checkPassword(next) {
 
   if((!this.password && !this.instagramId) && (!this.password && !this.githubId) ) {
     this.invalidate('password', 'required');
-  } 
+  }
 
   if(this.password && this._passwordConfirmation !== this.password){
     this.invalidate('passwordConfirmation', 'does not match');

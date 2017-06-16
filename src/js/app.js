@@ -46,7 +46,7 @@ function handleFileSelect(evt) {
     if (!f.type.match('image.*')) {
       continue;
     }
-
+    
     const reader = new FileReader();
 
     // Closure to capture the file information.
@@ -86,6 +86,12 @@ function initMap(lat, lng) {
     position: landmark,
     map: map
   });
+  google.maps.event.addDomListener(window, 'resize', function() {
+    var center = map.getCenter();
+    google.maps.event.trigger(map, 'resize');
+    map.setCenter(center);
+  })
+
 }
 
 

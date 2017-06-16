@@ -6,10 +6,14 @@
     <% include ./partials/stylesheets %>
     <% include ./partials/_scripts %>
   </head>
+
   <body>
     <header>
 <% include ./partials/navbar %>
     </header>
+<div id="wrap">
+  <div id="main">
+
     <main>
       <% for(const type in messages) { %>
   <div class="notification is-<%= type %>">
@@ -17,9 +21,13 @@
   </div>
 <% } %>
   </main>
-      <%- body %>
-  
 
-<% include ./partials/footer %>
+  <%- body %>
+    </div>
+</div>
+
+  <% include ./partials/footer %>
+
   </body>
+
 </html>

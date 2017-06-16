@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const timeAgo = require('time_ago_in_words');
+
 
 const commentSchema = new mongoose.Schema({
   content: {type: String, required: true},
@@ -13,6 +15,11 @@ commentSchema.methods.belongsTo = function belongsTo(user) {
   return user.id === this.createdBy.toString();
 };
 
+commentSchema
+  .virtual('timeAgo')
+  .get(function getImageSRC() {
+    return timeAgo(this.createdAt);
+  });
 
 
 const landmarkSchema = new mongoose.Schema({
@@ -22,12 +29,19 @@ const landmarkSchema = new mongoose.Schema({
   lat: {type: Number},
   lng: {type: Number},
   title: {type: String},
-  
+
   createdAt: { type: Date, default: Date.now },
   comments: [commentSchema]
 }, {
   timestamps: true
 });
+
+landmarkSchema
+  .virtual('timeAgo')
+  .get(function getImageSRC() {
+    return timeAgo(this.createdAt);
+  });
+
 
 landmarkSchema.virtual('imageSRC')
 .get(function getImageSRC() {
