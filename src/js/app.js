@@ -46,7 +46,7 @@ function handleFileSelect(evt) {
     if (!f.type.match('image.*')) {
       continue;
     }
-    
+
     const reader = new FileReader();
 
     // Closure to capture the file information.
@@ -93,7 +93,6 @@ function initMap(lat, lng) {
   })
 
 }
-
 
 function googleVision () {
   // Grabbing the file upload element from the form

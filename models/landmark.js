@@ -29,7 +29,6 @@ const landmarkSchema = new mongoose.Schema({
   lat: {type: Number},
   lng: {type: Number},
   title: {type: String},
-
   createdAt: { type: Date, default: Date.now },
   comments: [commentSchema]
 }, {
